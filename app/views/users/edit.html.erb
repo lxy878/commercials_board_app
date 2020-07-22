@@ -1,0 +1,8 @@
+<h1>Edit <%= @user.username %>'s Info</h1>
+<%= form_for @user do |f|%>
+    <p>Email: <%= f.email_field :email %></p>
+    <p>Phone Number: <%= f.text_field :phone_number %></p>
+    <p>Password: <%= f.password_field :password %></p>
+    <%= f.submit :'Update User Info' %>
+<% end %>
+
