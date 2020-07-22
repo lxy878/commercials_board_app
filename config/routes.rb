@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   root 'sessions#new'
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
-  get 'signin' => 'users#new'
-  post 'signin' => 'user#create'
+  get '/auth/github/callback' => 'sessions#create'
+  get 'signup' => 'users#new'
+  post 'signup' => 'users#create'
   delete 'logout' => 'sessions#destroy'
-
   resources :users, only: [:show, :edit, :update]
 end
