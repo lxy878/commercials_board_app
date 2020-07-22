@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+    
+    # log in
     def new  
     end
 
@@ -26,6 +28,7 @@ class SessionsController < ApplicationController
         end
     end
 
+    # log out
     def destroy
         session.clear
         redirect_to root_path

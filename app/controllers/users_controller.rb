@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+    before_action :authentication_required, only: [:show, :edit, :update]
+    # sign up
     def new
         @user = User.new
     end

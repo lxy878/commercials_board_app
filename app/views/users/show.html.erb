@@ -6,6 +6,6 @@
 <p>Phone Number: <%= @user.phone_number ? @user.phone_number : 'None'%><p>
 <%= link_to 'See My Comments', ''%><br>
 
-<%= link_to 'See My Commercials', ''%><br>
+<%= link_to 'See My Commercials', user_commercials_path(@user) %><br>
 
-<%= link_to 'See Commercials', ''%><br>
+<%= link_to 'See Commercials', commercials_path %><br>
