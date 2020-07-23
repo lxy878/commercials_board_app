@@ -1,11 +1,33 @@
 <%= link_to('Edit Commercial', edit_user_commercial_path(@user, @commercial)) if @user == @current_user%><br>
-<%= link_to('Delete Commercial', "/commercials/#{@commercial.id}", method: :delete) if @user == @current_user%><br>
+<%= link_to('Delete Commercial', delete_commercial_path(@commercial), method: :delete) if @user == @current_user%><br>
 <%= link_back(@user) %>
 
 <h1><%= @commercial.title %></h1>
 <p>State: <%= @commercial.state.name %></p>
 <p>Description: <%= @commercial.description %></p>
 
-<h2>Contect: </h2>
+<h3>Contect: </h3>
 <p>Email: <%= @user.email ? @user.email : 'None'%></p>
 <p>Phone Number: <%= @user.phone_number ? @user.phone_number : 'None'%></p>
+
+<%= form_for :comment, url: comments_path do |f|%>
+    <%= f.text_area :content %>
+    <%= f.hidden_field :user_id, value: @current_user.id %>
+    <%= f.hidden_field :commercial_id, value: @commercial.id %><br>
+    <%= f.submit :'Comment' %>
+<% end %>
+
+
+<p>User said: Posts</p>
+<% @commercial.comments.each do |comment|%>
+    <div>
+        <p><%= comment.user.username %> said:</p>
+        <p><%= comment.content %></p>
+        <% if comment.user == @current_user %>
+            <%= form_tag delete_comment_path(comment), method: :delete do %>
+                <%= hidden_field_tag :commercial_id, @commercial.id %>
+                <%= submit_tag :'Delete Comment'%>
+            <% end %>
+        <% end %>
+    </div>
+<% end %>

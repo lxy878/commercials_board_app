@@ -7,10 +7,12 @@ Rails.application.routes.draw do
   get 'signup' => 'users#new'
   post 'signup' => 'users#create'
   delete 'logout' => 'sessions#destroy'
-
+  post 'comments' => 'comments#create'
+  delete 'comment/:id' => 'comments#destroy', as: 'delete_comment'
+  delete 'commercial/:id' => 'commercials#destroy', as: 'delete_commercial'
   resources :users, only: [:show] do
     resources :commercials, only: [:index, :show, :edit, :new]
   end
   resources :users, only: [:edit, :update]
-  resources :commercials, only: [:index, :show, :create, :update, :destroy]
+  resources :commercials, only: [:index, :show, :create, :update]
 end
