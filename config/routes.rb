@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
 
   resources :users, only: [:show] do
-    resources :commercials, only: [:index, :show, :new, :create, :new, :create, :delete]
+    resources :commercials, only: [:index, :show, :edit, :new, :delete]
   end
   resources :users, only: [:edit, :update]
-  resources :commercials, only: [:index, :show]
+  resources :commercials, only: [:index, :show, :create, :update]
 end

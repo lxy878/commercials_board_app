@@ -3,7 +3,11 @@ class ApplicationController < ActionController::Base
     private
     
     def current_user
-        User.find(session[:user_id]) if session[:user_id]
+        @current_user = User.find_by(id: session[:user_id])
+        # session has :user_id only if log in
+            #once logged in, url has user_id
+            # current_user only if session==params
+        # otherwise, :user_id = nil
     end
 
     def logged_in?
