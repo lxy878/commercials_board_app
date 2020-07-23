@@ -1,0 +1,17 @@
+<%= form_for object do |f|%>
+    <%= f.label :title, 'Title:' %>
+    <%= f.text_field :title %><br><br>
+    <%= f.label :description, 'Description: ' %><br>
+    <%= f.text_area :description %><br><br>
+    <%= f.label :state, 'State:' %>
+    <%= f.fields_for :state, object.build_state do |state_fields|%>
+        <%= state_fields.text_field :name, list: "states_autocomplete" %>
+        <datalist id="states_autocomplete">
+            <% State.all.each do |state|%> 
+                <option value="<%= state.name %>">
+            <% end %>
+        </datalist>
+    <% end %>
+    <br><br>
+    <%= f.submit submit%>
+<% end %>

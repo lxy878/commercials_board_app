@@ -1,0 +1,3 @@
+<h1>Edit <%= @commercial.title%></h1>
+<%= render partial: 'form', locals: {object: @commercial, submit: 'Update Commercial'}%>
+<%= link_to 'Cancel', user_commercial_path(@current_user, @commercial)%>

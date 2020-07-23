@@ -28,6 +28,7 @@ class CommercialsController < ApplicationController
             end
         else
             @commercial = Commercial.find(params[:id])
+            @user = @commercial.user
         end
     end
 
@@ -48,13 +49,25 @@ class CommercialsController < ApplicationController
     end
 
     def edit
-
+        # fix user_id and move to medol
+        @commercial = @current_user.commercials.where(id: params[:id]).first
+        redirect_to user_commercials_path(@current_user) if !@commercial
+        
     end
 
     def update
+        @commercial = Commercial.find(params[:id])
+        if @commercial.update(commercial_params)
+            redirect_to user_commercial_path(@current_user, @commercial)
+        else
+            # display errors
+            redirect_to edit_user_commercial_path(@current_user, @commercial)
+        end
     end
 
-    def delete
+    def destroy
+        Commercial.find(params[:id]).destroy
+        redirect_to user_commercials_path(@current_user)
     end
 
     private

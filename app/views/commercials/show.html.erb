@@ -1,1 +1,11 @@
+<%= link_to('Edit Commercial', edit_user_commercial_path(@user, @commercial)) if @user == @current_user%><br>
+<%= link_to('Delete Commercial', "/commercials/#{@commercial.id}", method: :delete) if @user == @current_user%><br>
+<%= link_back(@user) %>
+
 <h1><%= @commercial.title %></h1>
+<p>State: <%= @commercial.state.name %></p>
+<p>Description: <%= @commercial.description %></p>
+
+<h2>Contect: </h2>
+<p>Email: <%= @user.email ? @user.email : 'None'%></p>
+<p>Phone Number: <%= @user.phone_number ? @user.phone_number : 'None'%></p>

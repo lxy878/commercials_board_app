@@ -4,6 +4,6 @@
 <h1><%= "#{@user.username}'s " if @user %>Commercials</h1>
 <ul>
     <% @commercials.each do |commercial|%>
-        <li><%= commercial.title %></li>
+        <li><h2><%= link_commercial(commercial, @user) %></h2></li>
     <% end %>
 </ul>
