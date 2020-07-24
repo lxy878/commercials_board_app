@@ -2,8 +2,17 @@
 <%= link_to('New Commercial', new_user_commercial_path) if @user %><br>
 <%= link_to('User Page', user_path(@current_user))%>
 <h1><%= "#{@user.username}'s " if @user %>Commercials</h1>
+<% if !params[:user_id] %>
+    <%= form_tag commercials_path, method: :get do %>
+        <%= label_tag :uid, 'Poster:' %>
+        <%= select_tag "uid", options_from_collection_for_select(User.all, "id", "username"), include_blank: true %>
+        <%= label_tag :state_id, 'State:' %>
+        <%= select_tag "state_id", options_from_collection_for_select(State.all, "id", "name"), include_blank: true %>
+        <%= submit_tag :'Filter' %>
+    <% end %>
+<% end %>
 <ul>
     <% @commercials.each do |commercial|%>
-        <li><h2><%= link_commercial(commercial, @user) %></h2></li>
+        <li><h2><%= link_commercial(commercial, @user) %>, <%= commercial.state.name %> - updated date: <%= commercial.updated_at%></h2></li>
     <% end %>
 </ul>

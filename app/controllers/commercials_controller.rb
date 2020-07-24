@@ -13,6 +13,15 @@ class CommercialsController < ApplicationController
         else
             @commercials = Commercial.all
         end
+
+        if params[:uid].present?||params[:state_id].present?
+            # state
+            @commercials = @commercials.where(user_id: params[:uid]) if params[:uid].present? 
+            @commercials = @commercials.where(state_id: params[:state_id]) if params[:state_id].present?
+            @commercials.order(updated_at: :desc)
+        end
+
+        
     end
 
     def show
@@ -30,11 +39,13 @@ class CommercialsController < ApplicationController
             @commercial = Commercial.find(params[:id])
             @user = @commercial.user
         end
+        # comments desc order
     end
 
     def new
         #  fix user_id 
         @commercial = Commercial.new
+        @state = State.new
     end
 
     def create
@@ -51,6 +62,7 @@ class CommercialsController < ApplicationController
     def edit
         # fix user_id and move to medol
         @commercial = @current_user.commercials.where(id: params[:id]).first
+        @state = @commercial.state
         redirect_to user_commercials_path(@current_user) if !@commercial
         
     end
