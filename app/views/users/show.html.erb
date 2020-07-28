@@ -1,11 +1,12 @@
-<%= link_to 'Log Out', logout_path, method: :delete %><br>
-<%= link_to 'Edit User Info', edit_user_path(@current_user) %> <br>
-<h1><%= @current_user.username %></h1>
+<div class='center'>
+    <div class='info'>
+        <p><strong>Name: </strong><%= @current_user.username %></p>
+        <p><strong>Email: </strong><%= @current_user.email ? @current_user.email : 'None'%><p>
+        <p><strong>Phone Number: </strong><%= @current_user.phone_number ? @current_user.phone_number : 'None'%><p><br>
 
-<p>Email: <%= @current_user.email ? @current_user.email : 'None'%><p>
-<p>Phone Number: <%= @current_user.phone_number ? @current_user.phone_number : 'None'%><p>
-<%= link_to 'See My Comments', ''%><br>
-
-<%= link_to 'See My Commercials', user_commercials_path(@current_user) %><br>
-
-<%= link_to 'See Commercials', commercials_path %><br>
+        
+        <%= button_to "Edit #{@current_user.username}'s Info", edit_user_path(@current_user), method: :get, class: 'button' %>
+        <%= button_to 'See My Commercials', user_commercials_path(@current_user), method: :get, class: 'button'%>
+        <%= button_to 'See Commercials', commercials_path, method: :get, class: 'button'%></button>
+    </div>
+</div>

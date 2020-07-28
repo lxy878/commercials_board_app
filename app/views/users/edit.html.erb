@@ -1,8 +1,14 @@
-<h1>Edit <%= @current_user.username %>'s Info</h1>
-<%= form_for @current_user do |f|%>
-    <p>Email: <%= f.email_field :email %></p>
-    <p>Phone Number: <%= f.text_field :phone_number %></p>
-    <p>Password: <%= f.password_field :password %></p>
-    <%= f.submit :'Update User Info' %>
-<% end %>
-
+<div class='center'>
+    <div class='content_center'>
+        <h1>Edit <%= @current_user.username %>'s Info</h1>
+        <%= form_for @current_user do |f|%>
+            <%= f.label :email, 'Email: '%>
+            <%= f.email_field :email %><br>
+            <%= f.label :phone_number, 'Phone Number: '%>
+            <%= f.text_field :phone_number %><br>
+            <%= f.label :password, 'Password: '%>
+            <%= f.password_field :password %><br><br>
+            <%= f.submit :'Update User Info' %>
+        <% end %>
+    </div>
+</div>

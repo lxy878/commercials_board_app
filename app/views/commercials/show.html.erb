@@ -1,28 +1,32 @@
-<%= link_to('Edit Commercial', edit_user_commercial_path(@user, @commercial)) if @user == @current_user%><br>
-<%= link_to('Delete Commercial', delete_commercial_path(@commercial), method: :delete) if @user == @current_user%><br>
+<%= button_to('Edit Commercial', edit_user_commercial_path(@user, @commercial), method: :get) if @user == @current_user%><br>
+<%= button_to('Delete Commercial', delete_commercial_path(@commercial)) if @user == @current_user%><br>
 <%= link_back(@user) %>
 
-<h1><%= @commercial.title %></h1>
-<p>State: <%= @commercial.state.name %></p>
-<p>Description: <%= @commercial.description %></p>
+<div class='center'>
+    <div class='content_center'>
+        <h2><%= @commercial.title %></h2>
+        <p class='info'><%= @commercial.description %></p>
 
-<h3>Contect: </h3>
-<p>Email: <%= @user.email ? @user.email : 'None'%></p>
-<p>Phone Number: <%= @user.phone_number ? @user.phone_number : 'None'%></p>
+        <h3>Contect: </h3>
+        <div class='info'>
+            <p>State: <%= @commercial.state.name %></p>
+            <p>Email: <%= @user.email ? @user.email : 'None'%></p>
+            <p>Phone Number: <%= @user.phone_number ? @user.phone_number : 'None'%></p>
+        <div>
+    </div>
+</div><br><br>
 
 <%= form_for :comment, url: comments_path do |f|%>
-    <%= f.text_area :content %>
+    <%= f.text_area :content, size: "100x5", placeholder: 'Leave a comment here.' %>
     <%= f.hidden_field :user_id, value: @current_user.id %>
     <%= f.hidden_field :commercial_id, value: @commercial.id %><br>
     <%= f.submit :'Comment' %>
-<% end %>
+<% end %><br><br>
 
-
-<p>User said: Posts</p>
 <% @commercial.comments.each do |comment|%>
     <div>
-        <p><%= comment.user.username %> said:</p>
-        <p><%= comment.content %></p>
+        <h3><%= comment.user.username %> said:</h3>
+        <p class='info'><%= comment.content %></p>
         <% if comment.user == @current_user %>
             <%= form_tag delete_comment_path(comment), method: :delete do %>
                 <%= hidden_field_tag :commercial_id, @commercial.id %>

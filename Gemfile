@@ -28,8 +28,8 @@ gem 'bcrypt', '~> 3.1.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
-# adds regions
-# gem 'city-state', '~> 0.1.0'
+# bootstrap
+gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 
 # github log in
 gem 'omniauth'

@@ -1,9 +1,15 @@
-<h1>User Log In</h1>
-
-<%= form_tag login_path do%>
-    <p>User Name: <%= text_field_tag :username %></p>
-    <p>Password: <%= password_field_tag :password %></p>
-    <%= submit_tag :'Log In'%>
-<% end %>
-<%= link_to 'New User', signup_path %> <br>
-<%= link_to 'Log in with github', '/auth/github' %>
+<div class='center'>
+    <h1>Welcome To Commercails Board</h1>
+    <br>
+    <div class='content_center'>
+        <%= form_tag login_path do%>
+            <%= label_tag :username, 'User Name:'%>
+            <%= text_field_tag :username %><br>
+            <%= label_tag :password, 'Password:'%>
+            <%= password_field_tag :password %> <br><br>
+            <%= submit_tag :'Log In'%>
+        <% end %><br>
+        <p>OR</p>
+        <%= button_to 'Log In with Github', '/auth/github', method: :get, class: 'button' %>
+    </div>
+</div>

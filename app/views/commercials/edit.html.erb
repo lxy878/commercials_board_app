@@ -1,3 +1,4 @@
-<h1>Edit <%= @commercial.title%></h1>
-<%= render partial: 'form', locals: {object: @commercial, submit: 'Update Commercial'}%>
-<%= link_to 'Cancel', user_commercial_path(@current_user, @commercial)%>
+<h2>Edit <%= @commercial.title%></h2><br>
+
+<%= render partial: 'form', locals: {object: @commercial, submit: 'Update Commercial'}%><br>
+<%= button_to 'Cancel', user_commercial_path(@current_user, @commercial), method: :get%>

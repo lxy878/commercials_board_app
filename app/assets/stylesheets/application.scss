@@ -1,0 +1,71 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+
+// use for nav bar
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body {
+  padding-top: 70px;
+  padding-bottom: 100px;
+  background-color: rgb(245, 249, 250);
+  font-family: Book Antiqua,Palatino,Palatino Linotype,Palatino LT STD,Georgia,serif;
+}
+
+.center {
+  text-align: center;
+}
+
+.content{
+  padding: 0em 5.5em;
+}
+
+.content_center{
+  display: inline-block;
+  text-align: left;
+}
+
+.info, .info_commercial{
+  text-align: left;
+  padding: 20px;
+  margin: 10px;
+  display: inline-block;
+}
+
+.info{
+  background-color: #eeeeee;
+  border-radius: 7px;
+  vertical-align: middle;
+}
+
+.info_commercial{
+  background-color: rgb(233, 238, 110);
+  border-radius: 10px;
+  vertical-align: top;
+}
+
+.text_wrap{
+  text-overflow: ellipsis;  
+  overflow: hidden; 
+  display: -webkit-box; 
+  max-width: 250px;       
+  line-height: 20px;      
+  max-height: 200px;      
+  -webkit-line-clamp: 6;  
+  -webkit-box-orient: vertical; 
+}
+
+.button{
+  margin: 2.5px 0px;
+}

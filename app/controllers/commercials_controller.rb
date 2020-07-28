@@ -2,6 +2,9 @@ class CommercialsController < ApplicationController
     before_action :authentication_required
 
     def index
+        @users = User.all
+        @states = State.all
+
         if params[:user_id]
             # previde directly editting id
             if session[:user_id] == params[:user_id].to_i
@@ -14,14 +17,14 @@ class CommercialsController < ApplicationController
             @commercials = Commercial.all
         end
 
+        # filter section
         if params[:uid].present?||params[:state_id].present?
-            # state
+            # move to model
             @commercials = @commercials.where(user_id: params[:uid]) if params[:uid].present? 
             @commercials = @commercials.where(state_id: params[:state_id]) if params[:state_id].present?
             @commercials.order(updated_at: :desc)
         end
 
-        
     end
 
     def show

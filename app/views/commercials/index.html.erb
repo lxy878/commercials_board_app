@@ -1,18 +1,22 @@
-
-<%= link_to('New Commercial', new_user_commercial_path) if @user %><br>
-<%= link_to('User Page', user_path(@current_user))%>
-<h1><%= "#{@user.username}'s " if @user %>Commercials</h1>
+<h2><%= "#{@user.username}'s " if @user %>Commercials</h2>
+<%= button_to('Create New Commercial', new_user_commercial_path, method: :get) if @user %><br>
 <% if !params[:user_id] %>
     <%= form_tag commercials_path, method: :get do %>
         <%= label_tag :uid, 'Poster:' %>
-        <%= select_tag "uid", options_from_collection_for_select(User.all, "id", "username"), include_blank: true %>
+        <%= select_tag "uid", options_from_collection_for_select(@users, "id", "username"), include_blank: true %>
         <%= label_tag :state_id, 'State:' %>
-        <%= select_tag "state_id", options_from_collection_for_select(State.all, "id", "name"), include_blank: true %>
+        <%= select_tag "state_id", options_from_collection_for_select(@states, "id", "name"), include_blank: true %>
         <%= submit_tag :'Filter' %>
     <% end %>
 <% end %>
-<ul>
+
+<div class='content'>
     <% @commercials.each do |commercial|%>
-        <li><h2><%= link_commercial(commercial, @user) %>, <%= commercial.state.name %> - updated date: <%= commercial.updated_at%></h2></li>
+        <div class='info_commercial'>
+            <h4 class='text_wrap'><strong><%= link_commercial(commercial, @user) %></strong></h4>
+            <p><strong>State: </strong><%= commercial.state.name %></p>
+            <p><strong>Updated Date: </strong><%= commercial.updated_at %></p>
+            <p class='text_wrap'><%= commercial.description %></p>
+        </div>
     <% end %>
-</ul>
+</div>

@@ -1,8 +1,8 @@
 <%= form_for object do |f|%>
     <%= f.label :title, 'Title:' %>
-    <%= f.text_field :title %><br><br>
+    <%= f.text_field :title, size: '100'%><br><br>
     <%= f.label :description, 'Description: ' %><br>
-    <%= f.text_area :description %><br><br>
+    <%= f.text_area :description, size: '150x10' %><br><br>
     <%= f.label :state, 'State:' %>
     <%= f.fields_for :state, @state do |state_fields|%>
         <%= state_fields.text_field :name, list: "states_autocomplete" %>
