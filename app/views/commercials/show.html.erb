@@ -1,19 +1,17 @@
-<%= button_to('Edit Commercial', edit_user_commercial_path(@user, @commercial), method: :get) if @user == @current_user%><br>
-<%= button_to('Delete Commercial', delete_commercial_path(@commercial)) if @user == @current_user%><br>
-<%= link_back(@user) %>
+<% if params[:user_id] %>
+    <button><%= link_to 'Edit Commercial', edit_user_commercial_path(@user, @commercial)%></button><br>
+    <button><%= link_to 'Delete Commercial', delete_commercial_path(@commercial), method: :delete %></button><br>
+<% end %>
+<button><%= link_back(@user) %></button>
 
-<div class='center'>
-    <div class='content_center'>
-        <h2><%= @commercial.title %></h2>
-        <p class='info'><%= @commercial.description %></p>
+<h2><%= @commercial.title %></h2>
+<p class='info'><%= @commercial.description %></p>
 
-        <h3>Contect: </h3>
-        <div class='info'>
-            <p>State: <%= @commercial.state.name %></p>
-            <p>Email: <%= @user.email ? @user.email : 'None'%></p>
-            <p>Phone Number: <%= @user.phone_number ? @user.phone_number : 'None'%></p>
-        <div>
-    </div>
+<h3>Contect: </h3>
+<div class='info'>
+    <p>State: <%= @commercial.state.name %></p>
+    <p>Email: <%= @user.email ? @user.email : 'None'%></p>
+    <p>Phone Number: <%= @user.phone_number ? @user.phone_number : 'None'%></p>
 </div><br><br>
 
 <%= form_for :comment, url: comments_path do |f|%>
@@ -23,7 +21,7 @@
     <%= f.submit :'Comment' %>
 <% end %><br><br>
 
-<% @commercial.comments.each do |comment|%>
+<% @commercial.comments_desc.each do |comment|%>
     <div>
         <h3><%= comment.user.username %> said:</h3>
         <p class='info'><%= comment.content %></p>

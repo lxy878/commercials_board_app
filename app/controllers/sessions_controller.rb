@@ -5,24 +5,19 @@ class SessionsController < ApplicationController
     end
 
     def create
+        # log in by Github
         if auth 
-            # refactor: in model
-            user = User.find_or_create_by(uid: auth[:uid]) do |u|
-                u.username = auth[:info][:name]
-                u.password = SecureRandom.hex
-                u.email = auth[:info][:email]
-            end
-
+            user = User.create_by_auth(auth)
             session[:user_id] = user.id
             redirect_to user_path(user)
 
-        else
+        else    # normal log in
             user = User.find_by(username: params[:username])
             if user && user.authenticate(params[:password])
                 session[:user_id] = user.id
                 redirect_to user_path(user)
             else
-                # TODO: display errors
+                flash[:login_error] = 'Error: Wrong User Name or Password'
                 redirect_to root_path
             end
         end

@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
 
     def authentication_required
         if !logged_in?
-            flash[:illegal_login] = 'Illegal Access!!!'
+            flash[:illegal_login] = 'Error: Illegal Access!!!'
             redirect_to root_path
         end
     end

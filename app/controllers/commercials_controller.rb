@@ -4,7 +4,6 @@ class CommercialsController < ApplicationController
     def index
         @users = User.all
         @states = State.all
-
         if params[:user_id]
             # previde directly editting id
             if session[:user_id] == params[:user_id].to_i
@@ -19,9 +18,8 @@ class CommercialsController < ApplicationController
 
         # filter section
         if params[:uid].present?||params[:state_id].present?
-            # move to model
-            @commercials = @commercials.where(user_id: params[:uid]) if params[:uid].present? 
-            @commercials = @commercials.where(state_id: params[:state_id]) if params[:state_id].present?
+            @commercials = Commercial.by_user(params[:uid]) if params[:uid].present? 
+            @commercials = Commercial.by_state(params[:state_id]) if params[:state_id].present?
             @commercials.order(updated_at: :desc)
         end
 
@@ -29,11 +27,10 @@ class CommercialsController < ApplicationController
 
     def show
         if params[:user_id]
-               # previde directly editting id
+            # prevent directly editting id
             if session[:user_id] == params[:user_id].to_i
                 @user = @current_user
-                # move to medol
-                @commercial = @user.commercials.where(id: params[:id]).first
+                @commercial = Commercial.by_user_and_id(@user, params[:id]).first
                 redirect_to user_commercials_path(@user) if !@commercial   
             else
                redirect_to user_path(@current_user) 
@@ -42,32 +39,32 @@ class CommercialsController < ApplicationController
             @commercial = Commercial.find(params[:id])
             @user = @commercial.user
         end
-        # comments desc order
     end
 
     def new
-        #  fix user_id 
-        @commercial = Commercial.new
-        @state = State.new
-    end
-
-    def create
-        #  fix user_id 
-        @commercial = @current_user.commercials.build(commercial_params)
-        if @commercial.save
-            redirect_to user_commercial_path(@current_user, @commercial)
+        if params[:user_id].to_i == session[:user_id]
+            @commercial = Commercial.new
+            @state = State.new
         else
-            # display errors
-            redirect_to new_user_commercial_path(@current_user)
+            redirect_to user_commercials_path(@current_user)
         end
     end
 
     def edit
-        # fix user_id and move to medol
-        @commercial = @current_user.commercials.where(id: params[:id]).first
-        @state = @commercial.state
-        redirect_to user_commercials_path(@current_user) if !@commercial
-        
+        if params[:user_id].to_i == session[:user_id] && @commercial = Commercial.by_user_and_id(@current_user, params[:id]).first
+            @state = @commercial.state
+        else
+            redirect_to user_commercials_path(@current_user)
+        end
+    end
+
+    def create
+        @commercial = @current_user.commercials.build(commercial_params)
+        if @commercial.save
+            redirect_to user_commercial_path(@current_user, @commercial)
+        else
+            redirect_to new_user_commercial_path(@current_user), flash: {errors: @commercial.errors.full_messages}
+        end
     end
 
     def update
@@ -75,8 +72,7 @@ class CommercialsController < ApplicationController
         if @commercial.update(commercial_params)
             redirect_to user_commercial_path(@current_user, @commercial)
         else
-            # display errors
-            redirect_to edit_user_commercial_path(@current_user, @commercial)
+            redirect_to edit_user_commercial_path(@current_user, @commercial), flash: {errors: @commercial.errors.full_messages}
         end
     end
 

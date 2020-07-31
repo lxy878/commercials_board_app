@@ -1,6 +1,6 @@
 module CommercialsHelper
     def link_back(user)
-        if user == @current_user
+        if params[:user_id]
             link_to "Back to #{user.username}'s Commericals Page", user_commercials_path(user)
         else
             link_to 'Back to Commericals Page', commercials_path
