@@ -6,12 +6,11 @@
 
 <h2><%= @commercial.title %></h2>
 <p class='info'><%= @commercial.description %></p>
-
 <h3>Contect: </h3>
 <div class='info'>
     <p>State: <%= @commercial.state.name %></p>
-    <p>Email: <%= @user.email ? @user.email : 'None'%></p>
-    <p>Phone Number: <%= @user.phone_number ? @user.phone_number : 'None'%></p>
+    <p>Email: <%= email(@user) %></p>
+    <p>Phone Number: <%= phone_number(@user) %></p>
 </div><br><br>
 
 <%= form_for :comment, url: comments_path do |f|%>

@@ -1,11 +1,11 @@
 <div class='center'>
     <div class='info'>
         <p><strong>Name: </strong><%= @current_user.username %></p>
-        <p><strong>Email: </strong><%= @current_user.email ? @current_user.email : 'None'%><p>
-        <p><strong>Phone Number: </strong><%= @current_user.phone_number ? @current_user.phone_number : 'None'%><p><br>
+        <p><strong>Email: </strong><%= email(@current_user) %><p>
+        <p><strong>Phone Number: </strong><%= phone_number(@current_user) %><p><br>
         
-        <%= button_to "Edit #{@current_user.username}'s Info", edit_user_path(@current_user), method: :get, class: 'button' %>
-        <%= button_to 'See My Commercials', user_commercials_path(@current_user), method: :get, class: 'button'%>
-        <%= button_to 'See Commercials', commercials_path, method: :get, class: 'button'%></button>
+        <button><%= link_to "Edit #{@current_user.username}'s Info", edit_user_path(@current_user)%></button><br>
+        <button><%= link_to 'See My Commercials', user_commercials_path(@current_user) %></button><br>
+        <button><%= link_to 'See Commercials', commercials_path %></button>
     </div>
 </div>
