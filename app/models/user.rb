@@ -15,4 +15,13 @@ class User < ApplicationRecord
             u.email = auth[:info][:email]
         end
     end
+
+    # --------- live coding ----------
+    def self.most_commercial_user
+        # create a join table of user_commercial
+        # count row numbers of the same usernames and return a hash with username and commercial counts
+        # find max count in the hash and return an array of the maximum commercial count with its key
+        joins(:commercials).group(:username).count.max_by{|username, commercial_count| commercial_count}
+    end
+    # ---------- end ----------------
 end

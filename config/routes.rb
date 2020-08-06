@@ -15,4 +15,6 @@ Rails.application.routes.draw do
   end
   resources :users, only: [:edit, :update]
   resources :commercials, only: [:index, :show, :create, :update]
+
+  get 'mostcommercials' => 'users#most_commercial_user'
 end

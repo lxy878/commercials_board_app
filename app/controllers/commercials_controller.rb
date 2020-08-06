@@ -18,9 +18,12 @@ class CommercialsController < ApplicationController
 
         # filter section
         if params[:uid].present?||params[:state_id].present?
-            @commercials = Commercial.by_user(params[:uid]) if params[:uid].present? 
-            @commercials = Commercial.by_state(params[:state_id]) if params[:state_id].present?
-            @commercials.order(updated_at: :desc)
+            # -------- refactor ---------
+            @commercials = Commercial
+            @commercials = @commercials.by_user(params[:uid]) if params[:uid].present? 
+            @commercials = @commercials.by_state(params[:state_id]) if params[:state_id].present?
+            @commercials = @commercials.desc_order
+            # -------- end ---------
         end
 
     end

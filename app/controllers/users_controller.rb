@@ -26,6 +26,13 @@ class UsersController < ApplicationController
         redirect_to user_path(@current_user)
     end
 
+    # --------- live coding ----------
+    def most_commercial_user
+        # ['username', commercial_count]
+        @user_data = User.most_commercial_user
+    end
+    # --------- end ----------
+    
     private
     
     def user_params
