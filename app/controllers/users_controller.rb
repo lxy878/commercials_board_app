@@ -28,8 +28,9 @@ class UsersController < ApplicationController
 
     # --------- live coding ----------
     def most_commercial_user
+        users_hash = User.commercial_user.count
         # ['username', commercial_count]
-        @user_data = User.most_commercial_user
+        @most_user_data = users_hash.max_by{|username, commercial_count| commercial_count}
     end
     # --------- end ----------
     
