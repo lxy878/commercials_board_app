@@ -15,9 +15,7 @@ $ rails s
 
 # Tech/framework used
 
-* Built with
-
-Ruby on Rails
+* Built with Ruby on Rails
 
 # License
 
