@@ -20,7 +20,7 @@
     <%= f.submit :'Comment' %>
 <% end %><br><br>
 
-<% @commercial.comments_desc.each do |comment|%>
+<% @commercial.comments.desc_order.each do |comment|%>
     <div>
         <h3><%= comment.user.username %> said:</h3>
         <p class='info'><%= comment.content %></p>
